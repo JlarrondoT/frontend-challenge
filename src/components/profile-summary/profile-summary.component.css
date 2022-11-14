@@ -1,0 +1,32 @@
+.profile-summary-card {
+    min-width: 714px;
+    border: 1px solid #ebe7e7;
+    border-radius: 6px;
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
+}
+
+.profile-summary-card > .left > img {
+    border-radius: 50%;
+    width: 70px;
+    border: 3px #3030ff solid;
+}
+
+.profile-summary-card > .right > p {
+    margin: 8px;
+}
+
+.profile-summary-card > .right > p:first-child {
+    font-size: 24px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+.right {
+    padding-left: 24px;
+}

@@ -1,0 +1,27 @@
+.profile-container {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.my-purchases-box {
+    margin-top: 24px;
+    min-width: 714px;
+    border: 1px solid #ebe7e7;
+    border-radius: 6px;
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
+    cursor: pointer;
+}
+
+.my-purchases-box > p {
+    margin-left: 10px;
+}
