@@ -9,8 +9,3 @@ interface UserModel {
 }
 
 export default UserModel;
-
-interface UserRestrictionsModel {
-    tipo: string,
-    mensaje: string,
-}
