@@ -1,0 +1,88 @@
+.purchases-container {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.purchase-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 800px;
+    border: 1px solid #ebe7e7;
+    border-radius: 6px;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.buying-date {
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.buying-date > p {
+    margin: 0;
+}
+
+.purchase-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.purchase-wrapper > .left > img {
+    width: 80px;
+}
+
+.purchase-wrapper > .right > p {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.left, .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    gap: 8px;
+}
+
+.mid-left, .mid-right {
+    width: 200px;
+}
+
+.right > button:first-child {
+    background-color: #3483fa;
+    border-color: transparent;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px;
+    cursor: pointer;
+    width: 160px;
+}
+
+.right > button:last-child {
+    background-color: rgba(65,137,230,.15);
+    border-color: transparent;
+    color: #3483fa;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px;
+    cursor: pointer;
+    width: 160px;
+}

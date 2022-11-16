@@ -4,12 +4,12 @@ import {
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from '@tanstack/react-query'
-import ProfileSummary from '../components/profile-summary/profile-summary.component';
-import WarningAlert from '../components/warning-alert/warning-alert.component';
-import { fetchUser, fetchUserRestriction } from '../services/user.services';
+} from '@tanstack/react-query';
 import { useNavigate } from "react-router-dom";
-import './Profile.css';
+import ProfileSummary from '../../components/profile-summary/profile-summary.component';
+import WarningAlert from '../../components/warning-alert/warning-alert.component';
+import { fetchUser } from '../../services/user.services';
+import './profile.component.css';
 
 
 function Profile() {
