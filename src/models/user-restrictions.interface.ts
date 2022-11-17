@@ -1,6 +1,6 @@
 interface UserRestrictionsModel {
-    tipo: string,
-    mensaje: string,
+  tipo: string;
+  mensaje: string;
 }
 
 export default UserRestrictionsModel;
