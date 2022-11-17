@@ -1,10 +1,4 @@
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from "react-router-dom";
 import ProfileSummary from '../../components/profile-summary/profile-summary.component';
 import WarningAlert from '../../components/warning-alert/warning-alert.component';
@@ -13,12 +7,12 @@ import './profile.component.css';
 
 
 function Profile() {
-    const { isError: userError, isLoading: userLoading, isSuccess: userSuccess, data } = useQuery(["user"], fetchUser, {staleTime: 60000});
+    const { isSuccess: userSuccess, data } = useQuery(["user"], fetchUser, {staleTime: 60000});
     let navigate = useNavigate();
     return (
       <div className='profile-container'>
         <div className="profile">
-          {userSuccess && (<div>
+          {userSuccess ? <div>
             <ProfileSummary user={data}/>
             <WarningAlert user={data}/>
             <div className='my-purchases-box' onClick={()=> navigate('/purchases', {replace: true})}>
@@ -27,7 +21,7 @@ function Profile() {
               </svg>
               <p>Mis compras</p>
             </div>
-            </div>) }
+            </div> : null }
         </div>
       </div>
     );

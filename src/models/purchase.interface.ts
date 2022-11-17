@@ -14,4 +14,12 @@ export interface Purchase {
     },
     id_transaccion: number,
     id_envio: number,
+    estado_transaccion?: {
+        id_transaccion: number,
+        estado: string
+    },
+    estado_envio?: {
+        id_envio: number,
+        estado: string
+    }
 }

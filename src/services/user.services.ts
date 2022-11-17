@@ -27,3 +27,16 @@ export const fetchPurchases = async (user:number, limit: number, offset: number)
         return response.data;
     }
 }
+
+export const fetchShipment = async (shipment:number) => {
+    const response = await axios.get(`http://localhost:3000/api/v1/shipment/${shipment}`);
+    if (response) {
+        return response.data;
+    }
+}
+export const fetchPayment = async (payment:number) => {
+    const response = await axios.get(`http://localhost:3000/api/v1/payment/${payment}`);
+    if (response) {
+        return response.data;
+    }
+}

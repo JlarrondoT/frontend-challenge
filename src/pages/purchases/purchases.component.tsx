@@ -2,13 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { Purchase } from '../../models/purchase.interface';
 import { fetchPurchases, fetchUser } from '../../services/user.services';
+import PurchaseStatus  from '../../components/purchase-status/purchase-status.component'
 import './purchases.component.css';
 
 export default function Purchases() {
     let limit = 5;
     let offset = 0;
-    const { data: userData } = useQuery(["user"], fetchUser, {staleTime: 60000});
-    const { isError, isLoading, isSuccess, data: purchasesData } = useQuery(["purchases"],() => fetchPurchases(userData.id_usuario, limit, offset), {staleTime: 60000, enabled: !!userData});
+    const { data: userData, isSuccess: userIsSuccess } = useQuery(["user"], fetchUser, {staleTime: 60000});
+    const { isError, isLoading, isSuccess: purchasesIsSuccess, data: purchasesData } = useQuery(["purchases"],() => fetchPurchases(userData.id_usuario, limit, offset), {staleTime: 60000, enabled: userIsSuccess});
 
     const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ export default function Purchases() {
     return (
         <div className="purchases-container">
             {
-                isSuccess && purchasesData.data.map((purchase: Purchase) => {
+                purchasesIsSuccess && purchasesData.data.map((purchase: Purchase) => {
                     return (
                             <div className='purchase-card'>
                                 <div className='buying-date'>
@@ -35,8 +36,7 @@ export default function Purchases() {
                                         <img src={purchase.imagen} alt="" />
                                     </div>
                                     <div className='mid-left'>
-                                        <p>{purchase.id_envio}</p>
-                                        <p>{purchase.id_transaccion}</p>
+                                        <PurchaseStatus purchase={purchase}/>
                                         <p>{purchase.titulo}</p>
                                     </div>
                                     <div className='mid-right'>
