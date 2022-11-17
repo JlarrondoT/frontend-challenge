@@ -1,6 +1,6 @@
 import "./header.component.css";
 
-function HeaderComponent() {
+export default function HeaderComponent() {
   return (
     <div className="header-container">
       <div className="header-wrapper">
@@ -17,5 +17,3 @@ function HeaderComponent() {
     </div>
   );
 }
-
-export default HeaderComponent;

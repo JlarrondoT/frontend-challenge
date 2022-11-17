@@ -8,19 +8,22 @@ export default function PurchaseStatus(props: { purchase: Purchase }) {
   const [shipment, setShipment] = useState();
 
   useEffect(() => {
-    const setStatus = async () => {
+    const setStatusPayment = async () => {
       setPayment(
         await fetchPayment(props.purchase.id_transaccion).then((resp) => {
           return resp.estado;
         })
       );
+    };
+    const setStatusShipment = async () => {
       setShipment(
         await fetchShipment(props.purchase.id_envio).then((resp) => {
           return resp.estado;
         })
       );
     };
-    setStatus();
+    setStatusPayment();
+    setStatusShipment();
   }, []);
 
   return (

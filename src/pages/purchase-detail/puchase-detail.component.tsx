@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import PurchaseStatus from "../../components/purchase-status/purchase-status.component";
 import { Purchase } from "../../models/purchase.interface";
 import "./puchase-detail.component.css";
@@ -7,6 +7,8 @@ import "./puchase-detail.component.css";
 export default function PurchaseDetail() {
   const [purchase, setPurchase] = useState<Purchase>();
   const { state } = useLocation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setPurchase(state);
@@ -26,6 +28,15 @@ export default function PurchaseDetail() {
 
   return purchase ? (
     <div className="purchase-detail-container">
+      <div
+        onClick={() =>
+          navigate("/purchases", {
+            replace: true,
+          })
+        }
+      >
+        Volver
+      </div>
       <div className="purchase-header-card">
         <div className="left">
           <p>{purchase?.titulo}</p>
