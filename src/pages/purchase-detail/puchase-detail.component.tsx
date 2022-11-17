@@ -26,7 +26,11 @@ export default function PurchaseDetail() {
     });
   };
 
-  return purchase ? (
+  if (!purchase) {
+    return null;
+  }
+
+  return (
     <div className="purchase-detail-container">
       <div
         onClick={() =>
@@ -56,5 +60,5 @@ export default function PurchaseDetail() {
         </div>
       </div>
     </div>
-  ) : null;
+  );
 }
