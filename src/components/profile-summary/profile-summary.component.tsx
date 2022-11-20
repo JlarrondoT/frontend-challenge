@@ -1,7 +1,7 @@
-import UserModel from "../../models/user.interface";
-import { useQuery } from "@tanstack/react-query";
-import { fetchLevelDetail } from "../../services/user.services";
-import "./profile-summary.component.css";
+import UserModel from '../../models/user.interface';
+import { useQuery } from '@tanstack/react-query';
+import Services from '../../services/user.services';
+import './profile-summary.component.css';
 
 export default function ProfileSummary({ user }: UserModel) {
   const {
@@ -9,7 +9,7 @@ export default function ProfileSummary({ user }: UserModel) {
     isLoading: userLoading,
     isSuccess: levelSuccess,
     data: levelData,
-  } = useQuery(["levelDetail"], () => fetchLevelDetail(user.nivel), {
+  } = useQuery(['levelDetail'], () => Services.fetchLevelDetail(user.nivel), {
     staleTime: 60000,
   });
 
@@ -22,7 +22,9 @@ export default function ProfileSummary({ user }: UserModel) {
         <p>
           {user.nombre} {user.apellido}
         </p>
-        <p>{levelSuccess && levelData["descripción"]}</p>
+        <p data-testid="level-message">
+          {levelSuccess && levelData['descripción']}
+        </p>
       </div>
     </div>
   );

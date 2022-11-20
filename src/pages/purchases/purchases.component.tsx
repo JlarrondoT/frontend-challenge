@@ -1,19 +1,19 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { Purchase } from '../../models/purchase.interface';
-import { fetchPurchases, fetchUser } from '../../services/user.services';
 import PurchaseStatus from '../../components/purchase-status/purchase-status.component';
 import './purchases.component.css';
 import Paginator from '../../components/paginator/paginator.component';
-import { useEffect, useState } from 'react';
-import { off } from 'process';
+import { useState } from 'react';
+import { dateFormat } from '../../utils/date.formater';
+import Services from '../../services/user.services';
 
 export default function Purchases() {
   const [limit, setLimit] = useState(5);
   const [offset, setOffset] = useState(0);
   const { data: userData, isSuccess: userIsSuccess } = useQuery(
     ['user'],
-    fetchUser,
+    Services.fetchUser,
     { staleTime: 60000 }
   );
   const {
@@ -23,18 +23,11 @@ export default function Purchases() {
     data: purchasesData,
   } = useQuery(
     ['purchases', offset],
-    () => fetchPurchases(userData.id_usuario, limit, offset),
+    () => Services.fetchPurchases(userData.id_usuario, limit, offset),
     { staleTime: 60000, enabled: userIsSuccess }
   );
 
   const navigate = useNavigate();
-
-  const dateFormat = (input: string) => {
-    const date = new Date(input);
-    return date
-      .toLocaleDateString('es-CL', { day: '2-digit', month: 'long' })
-      .replace('-', ' de ');
-  };
 
   const handleChangePaginator = (input: number) => {
     let newOffset = offset;
@@ -55,8 +48,8 @@ export default function Purchases() {
         stateChanger={handleChangePaginator}
       ></Paginator>
       {purchasesIsSuccess && userIsSuccess ? (
-        purchasesData.data.map((purchase: Purchase) => (
-          <div className="purchase-card">
+        purchasesData.data.map((purchase: Purchase, index: number) => (
+          <div className="purchase-card" key={index}>
             <div className="buying-date">
               <p>{dateFormat(purchase.fecha)}</p>
             </div>

@@ -1,20 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
-import { fetchUserRestriction } from "../../services/user.services";
-import UserModel from "../../models/user.interface";
-import "./warning-alert.component.css";
+import { useQuery } from '@tanstack/react-query';
+import UserModel from '../../models/user.interface';
+import Services from '../../services/user.services';
+import './warning-alert.component.css';
 
 export default function WarningAlert({ user }: UserModel) {
   const { isError, isLoading, isSuccess, data } = useQuery(
-    ["userRestriction"],
-    () => fetchUserRestriction(String(user.id_usuario)),
+    ['userRestriction'],
+    () => Services.fetchUserRestriction(String(user.id_usuario)),
     { staleTime: 60000 }
   );
 
   return (
     <div>
       {isSuccess &&
-        data.map((restriction: any) => (
-          <div className="alert-container">❗ {restriction.mensaje}</div>
+        data.map((restriction: any, index: number) => (
+          <div
+            className="alert-container"
+            data-testid="warning-alert-message"
+            key={index}
+          >
+            ❗ {restriction.mensaje}
+          </div>
         ))}
     </div>
   );

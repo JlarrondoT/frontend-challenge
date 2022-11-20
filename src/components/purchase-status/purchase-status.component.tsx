@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Purchase } from "../../models/purchase.interface";
-import { fetchPayment, fetchShipment } from "../../services/user.services";
-import "./purchase-status.component.css";
+import { useEffect, useState } from 'react';
+import { Purchase } from '../../models/purchase.interface';
+import Services from '../../services/user.services';
+import './purchase-status.component.css';
 
 export default function PurchaseStatus(props: { purchase: Purchase }) {
   const [payment, setPayment] = useState();
@@ -10,14 +10,16 @@ export default function PurchaseStatus(props: { purchase: Purchase }) {
   useEffect(() => {
     const setStatusPayment = async () => {
       setPayment(
-        await fetchPayment(props.purchase.id_transaccion).then((resp) => {
-          return resp.estado;
-        })
+        await Services.fetchPayment(props.purchase.id_transaccion).then(
+          (resp) => {
+            return resp.estado;
+          }
+        )
       );
     };
     const setStatusShipment = async () => {
       setShipment(
-        await fetchShipment(props.purchase.id_envio).then((resp) => {
+        await Services.fetchShipment(props.purchase.id_envio).then((resp) => {
           return resp.estado;
         })
       );
