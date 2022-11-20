@@ -1,8 +1,8 @@
-export const dateFormat = (input: string, short = true) => {
+export const dateFormat = (input: string, withYear = true) => {
   const date = new Date(input);
 
   let options: any = { day: '2-digit', month: 'long' };
-  if (!short) {
+  if (!withYear) {
     options = { ...options, year: 'numeric' };
   }
 
