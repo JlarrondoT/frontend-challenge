@@ -5,7 +5,7 @@ export interface Purchase {
     total: number;
     moneda: string;
   };
-  cantidad: 3;
+  cantidad: number;
   fecha: string;
   imagen: string;
   vendedor: {

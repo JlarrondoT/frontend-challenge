@@ -30,8 +30,8 @@ export default function PurchaseStatus(props: { purchase: Purchase }) {
 
   return (
     <div>
-      <p>Envío: {shipment}</p>
-      <p>Pago: {payment}</p>
+      <p data-testid="shipment-status">Envío: {shipment}</p>
+      <p data-testid="payment-status">Pago: {payment}</p>
     </div>
   );
 }

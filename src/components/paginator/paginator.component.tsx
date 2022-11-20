@@ -2,8 +2,8 @@ import { useState } from 'react';
 import './paginator.component.css';
 
 export default function Paginator(props: {
-  itemsPerPage: number;
-  total: number;
+  itemsPerPage: number | undefined;
+  total: number | undefined;
   stateChanger: any;
 }) {
   const [currentPagePosition, setCurrentPagePosition] = useState(1);
@@ -13,6 +13,9 @@ export default function Paginator(props: {
   };
 
   const handleChangePaginator = (input: 'nextPage' | 'prevPage' | number) => {
+    if (!props.itemsPerPage || !props.total) {
+      return;
+    }
     let nextPos = currentPagePosition;
     if (
       input === 'nextPage' &&
@@ -33,6 +36,7 @@ export default function Paginator(props: {
       <div
         className="arrow-box"
         onClick={() => handleChangePaginator('prevPage')}
+        data-testid="arrow-left"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -52,6 +56,7 @@ export default function Paginator(props: {
           key={index}
           className={page + 1 === currentPagePosition ? 'actual-page' : ''}
           onClick={() => handleChangePaginator(page + 1)}
+          data-testid={'page-selector-' + page}
         >
           {page + 1}
         </span>
@@ -59,6 +64,7 @@ export default function Paginator(props: {
       <div
         className="arrow-box"
         onClick={() => handleChangePaginator('nextPage')}
+        data-testid="arrow-right"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -24,6 +24,7 @@ function Profile() {
             <div
               className="my-purchases-box"
               onClick={() => navigate('/purchases', { replace: true })}
+              data-testid="purchases-navigate"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
