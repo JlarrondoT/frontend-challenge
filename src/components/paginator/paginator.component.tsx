@@ -14,18 +14,21 @@ export default function Paginator(props: {
 
   const handleChangePaginator = (input: 'nextPage' | 'prevPage' | number) => {
     let nextPos = currentPagePosition;
-    if (input === 'nextPage') {
+    if (
+      input === 'nextPage' &&
+      currentPagePosition < Math.ceil(props.total / props.itemsPerPage)
+    ) {
       nextPos += 1;
     } else if (input === 'prevPage' && currentPagePosition > 1) {
       nextPos -= 1;
     } else if (typeof input === 'number') {
       nextPos = input;
     }
-    setCurrentPagePosition((current) => (current = nextPos));
+    setCurrentPagePosition(nextPos);
     props.stateChanger(nextPos);
   };
 
-  return (
+  return props.itemsPerPage && props.total ? (
     <div className="paginator-wrapper">
       <div
         className="arrow-box"
@@ -70,5 +73,5 @@ export default function Paginator(props: {
         </svg>
       </div>
     </div>
-  );
+  ) : null;
 }

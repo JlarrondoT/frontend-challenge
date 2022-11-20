@@ -47,18 +47,14 @@ export default function Purchases() {
     setOffset((offset) => (offset = newOffset));
   };
 
-  if (!userIsSuccess || !purchasesIsSuccess) {
-    return <div>..cargando</div>;
-  }
-
   return (
     <div className="purchases-container">
       <Paginator
-        itemsPerPage={purchasesData.limit}
-        total={purchasesData.total}
+        itemsPerPage={purchasesData?.limit}
+        total={purchasesData?.total}
         stateChanger={handleChangePaginator}
       ></Paginator>
-      {purchasesIsSuccess &&
+      {purchasesIsSuccess && userIsSuccess ? (
         purchasesData.data.map((purchase: Purchase) => (
           <div className="purchase-card">
             <div className="buying-date">
@@ -90,7 +86,10 @@ export default function Purchases() {
               </div>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div>...cargando</div>
+      )}
     </div>
   );
 }
