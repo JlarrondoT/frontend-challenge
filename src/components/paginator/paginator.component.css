@@ -1,0 +1,18 @@
+.paginator-wrapper,
+.arrow-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.paginator-wrapper {
+  margin-bottom: 28px;
+}
+
+.actual-page {
+  text-decoration: underline;
+  color: blue;
+}

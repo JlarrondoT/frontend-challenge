@@ -1,15 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { Purchase } from "../../models/purchase.interface";
-import { fetchPurchases, fetchUser } from "../../services/user.services";
-import PurchaseStatus from "../../components/purchase-status/purchase-status.component";
-import "./purchases.component.css";
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { Purchase } from '../../models/purchase.interface';
+import { fetchPurchases, fetchUser } from '../../services/user.services';
+import PurchaseStatus from '../../components/purchase-status/purchase-status.component';
+import './purchases.component.css';
+import Paginator from '../../components/paginator/paginator.component';
+import { useEffect, useState } from 'react';
+import { off } from 'process';
 
 export default function Purchases() {
-  let limit = 5;
-  let offset = 0;
+  const [limit, setLimit] = useState(5);
+  const [offset, setOffset] = useState(0);
   const { data: userData, isSuccess: userIsSuccess } = useQuery(
-    ["user"],
+    ['user'],
     fetchUser,
     { staleTime: 60000 }
   );
@@ -19,7 +22,7 @@ export default function Purchases() {
     isSuccess: purchasesIsSuccess,
     data: purchasesData,
   } = useQuery(
-    ["purchases"],
+    ['purchases', offset],
     () => fetchPurchases(userData.id_usuario, limit, offset),
     { staleTime: 60000, enabled: userIsSuccess }
   );
@@ -29,16 +32,32 @@ export default function Purchases() {
   const dateFormat = (input: string) => {
     const date = new Date(input);
     return date
-      .toLocaleDateString("es-CL", { day: "2-digit", month: "long" })
-      .replace("-", " de ");
+      .toLocaleDateString('es-CL', { day: '2-digit', month: 'long' })
+      .replace('-', ' de ');
   };
 
-  if (!userData) {
+  const handleChangePaginator = (input: number) => {
+    let newOffset = offset;
+    if (input === 2) {
+      newOffset = 5;
+    } else if (input === 1) {
+      newOffset = 0;
+    }
+    console.log(newOffset);
+    setOffset((offset) => (offset = newOffset));
+  };
+
+  if (!userIsSuccess || !purchasesIsSuccess) {
     return <div>..cargando</div>;
   }
 
   return (
     <div className="purchases-container">
+      <Paginator
+        itemsPerPage={purchasesData.limit}
+        total={purchasesData.total}
+        stateChanger={handleChangePaginator}
+      ></Paginator>
       {purchasesIsSuccess &&
         purchasesData.data.map((purchase: Purchase) => (
           <div className="purchase-card">
@@ -59,7 +78,7 @@ export default function Purchases() {
               <div className="right">
                 <button
                   onClick={() =>
-                    navigate("/purchase-detail", {
+                    navigate('/purchase-detail', {
                       replace: true,
                       state: purchase,
                     })
