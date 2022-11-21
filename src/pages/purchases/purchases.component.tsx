@@ -1,11 +1,11 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { Purchase } from '../../models/purchase.interface';
 import PurchaseStatus from '../../components/purchase-status/purchase-status.component';
 import './purchases.component.css';
 import Paginator from '../../components/paginator/paginator.component';
 import { useState } from 'react';
-import { dateFormat } from '../../utils/date.formater';
+import { dateFormat } from '../../utils/utils';
 import Services from '../../services/user.services';
 
 export default function Purchases() {
@@ -36,7 +36,6 @@ export default function Purchases() {
     } else if (input === 1) {
       newOffset = 0;
     }
-    console.log(newOffset);
     setOffset((offset) => (offset = newOffset));
   };
 
@@ -72,6 +71,7 @@ export default function Purchases() {
                       state: purchase,
                     })
                   }
+                  data-testid="purchase-detail-navigate"
                 >
                   Ver compra
                 </button>

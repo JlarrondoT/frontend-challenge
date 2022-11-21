@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import PurchaseStatus from '../../components/purchase-status/purchase-status.component';
 import { Purchase } from '../../models/purchase.interface';
-import { dateFormat } from '../../utils/date.formater';
+import { dateFormat, currencyFormat, setQuantityText } from '../../utils/utils';
 import './puchase-detail.component.css';
 
 export default function PurchaseDetail() {
@@ -14,18 +14,6 @@ export default function PurchaseDetail() {
   useEffect(() => {
     setPurchase(state);
   }, []);
-
-  const setQuantityText = (quantity: number) => {
-    return quantity > 1 ? 'unidades' : 'unidad';
-  };
-
-  const currencyFormat = (value: number) => {
-    return value.toLocaleString('es-ar', {
-      style: 'currency',
-      currency: 'ARS',
-      minimumFractionDigits: 2,
-    });
-  };
 
   if (!purchase) {
     return null;
@@ -40,6 +28,7 @@ export default function PurchaseDetail() {
             replace: true,
           })
         }
+        data-testid="purchases-navigate"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -57,9 +46,9 @@ export default function PurchaseDetail() {
       </div>
       <div className="purchase-header-card">
         <div className="left">
-          <p>{purchase?.titulo}</p>
+          <p>{purchase.titulo}</p>
           <p>
-            {purchase?.cantidad} {setQuantityText(purchase?.cantidad)}
+            {purchase.cantidad} {setQuantityText(purchase.cantidad)}
           </p>
         </div>
         <div className="right">
