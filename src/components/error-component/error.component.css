@@ -1,4 +1,29 @@
 .error-container {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  border: 1px solid grey;
+  padding: 6px 18px;
+  border-radius: 8px;
+}
+
+.error-container > p {
+  color: black;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.error-container > button {
+  display: flex;
+  gap: 8px;
+  background-color: rgba(65, 137, 230, 0.15);
+  border-color: transparent;
+  color: #3483fa;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  height: 32px;
+  align-content: center;
+  align-items: center;
+  cursor: pointer;
 }
