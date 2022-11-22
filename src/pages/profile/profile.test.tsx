@@ -18,7 +18,6 @@ describe('Profile-page component', () => {
 
   test('test component mounts', async () => {
     const queryClient = new QueryClient();
-
     const mockUser = {
       data: {
         id_usuario: 1,
@@ -47,5 +46,26 @@ describe('Profile-page component', () => {
     expect(mockedUsedNavigate).toHaveBeenCalledWith('/purchases', {
       replace: true,
     });
+  });
+
+  test('test user service error', async () => {
+    const queryClient = new QueryClient({
+      defaultOptions: {
+        queries: {
+          retry: 1,
+          retryDelay: 0,
+        },
+      },
+    });
+
+    jest.spyOn(axios, 'get').mockRejectedValue(new Error('error'));
+
+    const component = render(
+      <QueryClientProvider client={queryClient}>
+        <Profile />
+      </QueryClientProvider>
+    );
+
+    expect(component).toBeTruthy();
   });
 });
